@@ -17,6 +17,7 @@
 \newcommand\trythis{\ex{Try this.}\ }
 \newcommand\shell[1]{\colorbox{black}{\color{green} \tt #1}}
 \newcommand\sample[1]{{\tt #1}}
+\newcommand\filename[1]{{\tt #1}}
 
 \DeclareUrlCommand\curl{%
   \renewcommand\UrlFont{\ttfamily\color{blue}}%
@@ -128,7 +129,7 @@ Note tilde \sample{\~{}} between \sample{Section} and \cmd{ref}: prevents linebr
 \begin{frame}[fragile=singleslide]{Makefiles}
 If you change the section numbers, you will have to re-run \shell{pdflatex}.
 Consequently, it's common to run the program twice.
-Can do this with a Makefile:
+Can do this with a \filename{Makefile}:
 \begin{Verbatim}[frame=single]
 helloworld.pdf: helloworld.tex
 	pdflatex helloworld.tex
@@ -484,5 +485,132 @@ x_{n+2} & = & x_n + x_{n+1}
 \end{eqnarray*}
 \end{frame}
 
+\section{Marmosets}
+
+%%%
+\slide{Interlude}{
+\ex{Do the following:}
+\begin{enumerate}
+\item Download a set of predicted gene annotations from UCSC for your
+  vertebrate of choice. (I used the Augustus gene predictions for
+  marmoset.)
+\item Also download the description of that table. Find out which
+  column in the table has the number of exons for each gene.
+\item Using \shell{perl}, \shell{python}, \shell{sed}, \shell{cut},
+  or another such tool, extract the number of exons as a column of
+  numbers.
+\item Plot the frequency distribution in R (or otherwise).
+\item Export as a PDF file, \filename{exonFreqs.pdf}
+\end{enumerate}
+}
+
+%%%
+\begin{frame}[fragile=singleslide]{Example R script}
+\begin{Verbatim}[frame=single]
+require("ggplot2")
+exons <- read.csv("numExons.txt")
+plot <- qplot(exons,geom="histogram",binwidth=1,
+        main="Marmoset exon count distribution")
+      + scale_y_continuous()
+      + scale_x_continuous(limits=c(0,100))
+      + xlab("Number of exons")
+ggsave ("exonFreqs.pdf", plot)
+\end{Verbatim}
+
+Save as \filename{plot.R}
+\end{frame}
+
+
+%%%
+\begin{frame}[fragile=singleslide]{Example Makefile}
+\begin{Verbatim}[frame=single]
+PREFIX := hgdownload.cse.ucsc.edu/goldenPath
+SPECIES := calJac3
+URL := http://$(PREFIX)/$(SPECIES)/database
+
+augustusGene.sql augustusGene.txt.gz:
+	curl -O $(URL)/$@
+
+%.txt: %.txt.gz
+	gunzip --keep $<
+
+numExons.txt: augustusGene.txt
+	cat $< | cut -f 9 >$@
+
+exonFreqs.pdf: numExons.txt plot.R
+	R -f plot.R
+\end{Verbatim}
+\end{frame}
+
+% just to keep emacs syntax highlighting happy:
+%$
+
+\section{Figures}
+
+%%%
+\begin{frame}[fragile=singleslide]{Figure}
+\begin{Verbatim}[frame=single]
+\includegraphics{numExons.pdf}
+\end{Verbatim}
+
+Of course, you can get more elaborate...
+\end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{Figure, with caption}
+\begin{Verbatim}[frame=single]
+\begin{figure}
+\includegraphics[width=\textwidth]{numExons.pdf}
+\caption{
+  \label{ExonDistribution}
+  Distribution of exon frequencies in marmosets.
+}
+\end{figure}
+\end{Verbatim}
+\end{frame}
+
+\section{Bibliography}
+
+%%%
+\begin{frame}[fragile=singleslide]{BibTeX}
+\begin{Verbatim}[frame=single]
+\bibliographystyle{natbib}  % or plain, unsrt, ...
+\bibliography{references}
+\end{Verbatim}
+
+Implies the existence of a file \filename{references.bib}
+\begin{Verbatim}[frame=single]
+@Article{Marx2016,
+ Author="Marx, V.",
+ Title="{N}eurobiology: learning from marmosets",
+ Journal="Nat. Methods",
+ Year="2016",
+ Volume="13",
+ Number="11",
+ Pages="911--916"
+}
+\end{Verbatim}
+\end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{Running BibTeX}
+Typically you need to run \cmd{pdflatex}, then \cmd{bibtex}, then \cmd{pdflatex} twice to ensure references are correct:
+\begin{Verbatim}[frame=single]
+%.pdf: %.tex references.bib
+	pdflatex $<
+        bibtex $<
+	pdflatex $<
+	pdflatex $<
+\end{Verbatim}
+\end{frame}
+
+%%%
+\slide{TeXMed}{
+\curl{http://www.bioinformatics.org/texmed/}
+
+BibTeX wrapper for PubMed.
+
+\ex{Try adding a reference for your vertebrate of choice.}
+}
 
 \end{document}
