@@ -1,5 +1,9 @@
 \documentclass{beamer}
 \usepackage{fancyvrb}
+\usepackage{url}
+\usepackage{color}
+\usepackage[normalem]{ulem}
+\usepackage{soul}
 
 \newcommand\slide[2]{
 \begin{frame}[fragile=singleslide]{#1}
@@ -8,6 +12,17 @@
 }
 
 \newcommand\cmd[1]{{\tt \textbackslash #1}}
+
+\newcommand\ex[1]{\colorbox{red}{\color{white} #1}}
+\newcommand\trythis{\ex{Try this.}}
+\newcommand\shell[1]{\colorbox{black}{\color{green} \tt #1}}
+\newcommand\sample[1]{{\tt #1}}
+
+\DeclareUrlCommand\curl{%
+  \renewcommand\UrlFont{\ttfamily\color{blue}}%
+  \renewcommand\UrlLeft{\uline\bgroup}%
+  \renewcommand\UrlRight{\egroup}}
+
 
 \mode<presentation>
 {
@@ -29,6 +44,21 @@
 
 %%%
 \slide{Outline}{\tableofcontents}
+
+%%%
+\begin{frame}[fragile=singleslide]{Key}
+\begin{enumerate}
+\item \ex{Exercises in white on red}
+\item \shell{Shell commands in green type on black}
+\item URLs in blue: \curl{http://tinyurl.com/texroll}
+\item Source code in boxes
+\end{enumerate}
+\begin{Verbatim}[frame=single]
+This is some LaTeX source code
+\end{Verbatim}
+
+\ex{Try the URL now!}
+}
 
 \section{Why \LaTeX?}
 
@@ -62,18 +92,17 @@
 \documentclass{article}
 \title{Marmosets Are Great}
 \author{Ian Holmes}
-
 \begin{document}
 \maketitle
 \abstract{A short treatise on marmosets.}
-
 \section{Introduction}
 Marmosets ({\em Callitrichidae})
 are {\bf New World Monkeys}.
-
 \end{document}
 \end{Verbatim}
-Compile with {\tt pdflatex helloworld.tex}
+Compile with \shell{pdflatex helloworld.tex}
+
+\trythis
 \end{frame}
 
 %%%
@@ -88,14 +117,16 @@ Marmosets are New World Monkeys.
 Marmosets are found in the New World,
 as mentioned in Section~\ref{intro}.
 \end{Verbatim}
-Note tilde {\tt \~{}} between {\tt Section} and \cmd{ref}: prevents linebreak.
+Note tilde \sample{\~{}} between \sample{Section} and \cmd{ref}: prevents linebreak.
+
+\ex{Add a section or two, and recompile.}
 }
 
 \section{Makefiles}
 
 %%%
 \begin{frame}[fragile=singleslide]{Makefiles}
-If you change the section numbers, you will have to re-run {\tt pdflatex}.
+If you change the section numbers, you will have to re-run \shell{pdflatex}.
 Consequently, it's common to run the program twice.
 Can do this with a Makefile:
 \begin{Verbatim}[frame=single]
@@ -114,12 +145,12 @@ TARGET: DEPENDENCIES
 %%%
 \begin{frame}[fragile=singleslide]{Make command-line usage}
 \begin{itemize}
-\item General: {\tt make helloworld.pdf}
-\item Force rebuild: {\tt make -B helloworld.pdf}
-\item Dry run: {\tt make -n helloworld.pdf}
+\item General: \shell{make helloworld.pdf}
+\item Force rebuild: \shell{make -B helloworld.pdf}
+\item Dry run: \shell{make -n helloworld.pdf}
 \end{itemize}
 
-By default, {\tt make} just builds first target in Makefile.
+By default, \shell{make} just builds first target in Makefile.
 \end{frame}
 
 %%%
@@ -135,7 +166,7 @@ Titus Brown's checklist for paper replicability:
 \item the data necessary to run the pipeline;
 \item some of the output data discussed in the paper.
 \end{itemize}
-\url{http://ivory.idyll.org/blog/replication-i.html}
+\curl{http://ivory.idyll.org/blog/replication-i.html}
 
 \end{frame}
 
@@ -153,6 +184,85 @@ all: $(MAIN).pdf
 
 clean:
 	rm *.toc *.log *.out *.pdf *.aux *~
+\end{Verbatim}
+
+\trythis
+Use \shell{make}, \shell{make -n} and \shell{make -B}.
+\end{frame}
+
+
+\section{Styling}
+
+%%%
+\begin{frame}[fragile=singleslide]{Comments, escapes, styling}
+\begin{Verbatim}[frame=single]
+% Comments
+Actual percent sign: 100\%
+Other escapes: \_, \&
+Tilde escape: \~{}
+
+``Pretty quotation marks''
+
+Empty line signals new paragraph.
+
+Explicit line \\ break
+\end{Verbatim}
+
+\begin{tabular}{ll}
+\sample{\{\cmd{bf} Bold\}} & {\bf Bold} \\
+\sample{\{\cmd{em} Italic\}} & {\em Italic} \\
+\sample{\{\cmd{tt} Typewriter\}} & {\tt Typewriter}
+\end{tabular}
+\ex{Try these.}
+\end{frame}
+
+
+%%%
+\begin{frame}[fragile=singleslide]{Lists}
+\begin{Verbatim}[frame=single]
+List of books about wizard school
+\begin{itemize}
+\item Earthsea
+\item Harry Potter
+\item The Magicians
+\item The Once and Future King
+\end{itemize}
+\end{Verbatim}
+\trythis
+Also try \cmd{enumerate} instead of \cmd{itemize},
+and try nesting lists inside other lists.
+How many levels deep can you nest?
+\end{frame}
+
+
+
+
+
+%%%
+\begin{frame}[fragile=singleslide]{}
+\begin{Verbatim}[frame=single]
+ok
+\end{Verbatim}
+\end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{}
+\begin{Verbatim}[frame=single]
+ok
+\end{Verbatim}
+\end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{}
+\begin{Verbatim}[frame=single]
+ok
+\end{Verbatim}
+\end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{}
+\begin{Verbatim}[frame=single]
+ok
 \end{Verbatim}
 \end{frame}
 
