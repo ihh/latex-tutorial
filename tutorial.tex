@@ -14,7 +14,7 @@
 \newcommand\cmd[1]{{\tt \textbackslash #1}}
 
 \newcommand\ex[1]{\colorbox{red}{\color{white} #1}}
-\newcommand\trythis{\ex{Try this.}}
+\newcommand\trythis{\ex{Try this.}\ }
 \newcommand\shell[1]{\colorbox{black}{\color{green} \tt #1}}
 \newcommand\sample[1]{{\tt #1}}
 
@@ -205,16 +205,21 @@ Tilde escape: \~{}
 
 Empty line signals new paragraph.
 
-Explicit line \\ break
+Space: \quad Explicit line \\ break
 \end{Verbatim}
 
+Can you get {\bf bold}, {\em italic} \& {\tt typewriter} fonts?
+
+\ex{Google these typefaces.}
+\end{frame}
+
+\slide{Typefaces}{
 \begin{tabular}{ll}
 \sample{\{\cmd{bf} Bold\}} & {\bf Bold} \\
 \sample{\{\cmd{em} Italic\}} & {\em Italic} \\
 \sample{\{\cmd{tt} Typewriter\}} & {\tt Typewriter}
 \end{tabular}
-\ex{Try these.}
-\end{frame}
+}
 
 
 %%%
@@ -229,26 +234,52 @@ List of books about wizard school
 \end{itemize}
 \end{Verbatim}
 \trythis
+
 Also try \cmd{enumerate} instead of \cmd{itemize},
 and try nesting lists inside other lists.
-How many levels deep can you nest?
+
+\ex{How many levels deep can you nest?}
 \end{frame}
 
-
-
-
-
 %%%
-\begin{frame}[fragile=singleslide]{}
+\begin{frame}[fragile=singleslide]{Tables}
+\begin{tabular}{rcl}
+Right-justified & Centered & Left-justified \\
+\hline
+School vouchers & Science & Public education \\
+Defense spending & Trade deals & Aid programs
+\end{tabular}
+
 \begin{Verbatim}[frame=single]
-ok
+\begin{tabular}{rcl}
+Right-justified & Centered & Left-justified \\
+\hline
+School vouchers & Science & Public education \\
+Defense spending & Trade deals & Aid programs
+\end{tabular}
 \end{Verbatim}
+
+\ex{Time to add a table.}
+
+Make a table with some facts about marmosets.
+Or pick another vertebrate from \curl{hgdownload.cse.ucsc.edu}
+and make a table about it.
 \end{frame}
 
 %%%
-\begin{frame}[fragile=singleslide]{}
+\begin{frame}[fragile=singleslide]{Table captions and references}
 \begin{Verbatim}[frame=single]
-ok
+\begin{table}
+\begin{tabular}
+...
+\end{tabular}
+\caption{
+ \label{MarmosetFacts}
+ A table of marmoset facts.
+}
+\end{table}
+
+For marmoset data, see Table~\ref{MarmosetFacts}.
 \end{Verbatim}
 \end{frame}
 
