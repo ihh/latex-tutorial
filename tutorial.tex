@@ -283,18 +283,73 @@ For marmoset data, see Table~\ref{MarmosetFacts}.
 \end{Verbatim}
 \end{frame}
 
+\section{Mathematics}
+
 %%%
-\begin{frame}[fragile=singleslide]{}
+\begin{frame}[fragile=singleslide]{Equations}
 \begin{Verbatim}[frame=single]
-ok
+Inline: $a = 3$, $b = 5$
+
+Non-numbered:
+\[
+y = ax + b
+\]
+
 \end{Verbatim}
+
+Inline: $a = 3$, $b = 5$
+
+Non-numbered:
+\[
+y = ax + b
+\]
+\end{frame}
+
+
+
+%%%
+\begin{frame}[fragile=singleslide]{Equations}
+\begin{Verbatim}[frame=single]
+Numbered (Equation~\ref{Gaussian}):
+\begin{equation}
+x \sim {\cal N}(\mu,\sigma):
+\quad
+P(x' \leq x < x' + dx') =
+\frac{1}{\sqrt{2 \pi \sigma^2}}
+e^{-\frac{(x'-\mu)^2}{2\sigma^2}} dx'
+\label{Gaussian}
+\end{equation}
+\end{Verbatim}
+
+Numbered (Equation~\ref{Gaussian}):
+\begin{equation}
+x \sim {\cal N}(\mu,\sigma):
+\quad
+P(x' \leq x < x' + dx') =
+\frac{1}{\sqrt{2 \pi \sigma^2}}
+e^{-\frac{(x'-\mu)^2}{2\sigma^2}} dx'
+\label{Gaussian}
+\end{equation}
+
 \end{frame}
 
 %%%
-\begin{frame}[fragile=singleslide]{}
+\begin{frame}[fragile=singleslide]{Equations}
 \begin{Verbatim}[frame=single]
-ok
+Numbered (Equation~\ref{Gaussian}):
+\begin{equation}
+x \sim {\cal N}(\mu,\sigma):
+\quad
+P(x' \leq x < x' + dx') =
+\frac{1}{\sqrt{2 \pi \sigma^2}}
+e^{-\frac{(x'-\mu)^2}{2\sigma^2}} dx'
+\label{Gaussian}
+\end{equation}
 \end{Verbatim}
+
+\ex{Google ``Latex math symbols''.}
+
+\ex{Write out another distribution e.g. Poisson.}
 \end{frame}
 
 
