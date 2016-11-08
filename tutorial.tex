@@ -1,5 +1,11 @@
 \documentclass{beamer}
 
+\newcommand\slide[2]{
+\begin{frame}[fragile=singleslide]{#1}
+#2
+\end{frame}
+}
+
 \mode<presentation>
 {
   \usetheme{Berkeley}
@@ -17,13 +23,11 @@
   \titlepage
 \end{frame}
 
-\begin{frame}{Outline}
-  \tableofcontents
-\end{frame}
+\slide{Outline}{\tableofcontents}
 
 \section{Why \LaTeX?}
 
-\begin{frame}{\LaTeX~advocacy}
+\slide{\LaTeX~advocacy}{
   \begin{enumerate}
     \item It's free, portable, open source \& extensible
     \item Source files are plain text, revision control easier
@@ -31,11 +35,11 @@
     \item Style changes are easier
     \item {\bf Separation of form and content}
   \end{enumerate}
-\end{frame}
+}
 
 \section{The Basics}
 
-\begin{frame}[fragile=singleslide]{First document}
+\begin{frame}[fragile=singleslide]{Hello World}
   \begin{verbatim}
 \documentclass{article}
 
