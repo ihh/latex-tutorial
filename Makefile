@@ -1,7 +1,9 @@
 
 MAIN = tutorial
 
-open: $(MAIN).pdf
+all: $(MAIN).pdf.open
+
+%.open: %
 	open $<
 
 %.pdf: %.tex
