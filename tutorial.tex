@@ -353,4 +353,136 @@ e^{-\frac{(x'-\mu)^2}{2\sigma^2}} dx'
 \end{frame}
 
 
+%%%
+\begin{frame}[fragile=singleslide]{Brackets, arrays}
+\begin{Verbatim}[frame=single]
+\[
+\left(
+ \begin{array}{c}
+  n \\
+  k
+ \end{array}
+ \right)
+= n \times (n-1) \times (n-2) \ldots \times (n-k)
+= \frac{n!}{k!}
+\]
+\end{Verbatim}
+
+\[
+\left(
+ \begin{array}{c}
+  n \\
+  k
+ \end{array}
+\right)
+= n \times (n-1) \times (n-2)
+   \times \ldots \times (n-k)
+= \frac{n!}{k!}
+\]
+\end{frame}
+
+
+%%%
+\begin{frame}[fragile=singleslide]{Macro commands}
+\begin{Verbatim}[frame=single]
+\newcommand\binomial[2]{
+\left(
+ \begin{array}{c}
+  #1 \\
+  #2
+ \end{array}
+ \right)
+}
+\[
+ \binomial{5}{2} = 5 \times 4 \times 3 = 60
+\]
+\end{Verbatim}
+
+\newcommand\binomial[2]{
+\left(
+ \begin{array}{c}
+  #1 \\
+  #2
+ \end{array}
+ \right)
+}
+$\binomial{5}{2} = 5 \times 4 \times 3 = 60$
+\quad \trythis
+\end{frame}
+
+
+%%%
+\begin{frame}[fragile=singleslide]{More arrays; text in math environments}
+\begin{Verbatim}[frame=single]
+\[
+H(x) = \left\{
+ \begin{array}{ll}
+  0 & \mbox{for $x < 0$} \\
+  1 & \mbox{for $x \geq 0$}
+ \end{array}
+\right.
+\]
+\end{Verbatim}
+
+\[
+H(x) = \left\{
+ \begin{array}{ll}
+  0 & \mbox{for $x < 0$} \\
+  1 & \mbox{for $x \geq 0$}
+ \end{array}
+\right.
+\]
+\end{frame}
+
+
+%%%
+\begin{frame}[fragile=singleslide]{Equation arrays}
+\begin{Verbatim}[frame=single]
+\begin{eqnarray}
+x_1 & = & 1 \\
+x_2 & = & 1 \\
+x_{n+2} & = & x_n + x_{n+1}
+\end{eqnarray}
+\end{Verbatim}
+\begin{eqnarray}
+x_1 & = & 1 \\
+x_2 & = & 1 \\
+x_{n+2} & = & x_n + x_{n+1}
+\end{eqnarray}
+\end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{Equation arrays (cleaner numbering)}
+\begin{Verbatim}[frame=single]
+\begin{eqnarray}
+x_1 & = & 1 \nonumber \\
+x_2 & = & 1 \nonumber \\
+x_{n+2} & = & x_n + x_{n+1}
+\end{eqnarray}
+\end{Verbatim}
+\begin{eqnarray}
+x_1 & = & 1 \nonumber \\
+x_2 & = & 1 \nonumber \\
+x_{n+2} & = & x_n + x_{n+1}
+\end{eqnarray}
+\end{frame}
+
+
+%%%
+\begin{frame}[fragile=singleslide]{Equation arrays (no numbering)}
+\begin{Verbatim}[frame=single]
+\begin{eqnarray*}
+x_1 & = & 1 \\
+x_2 & = & 1 \\
+x_{n+2} & = & x_n + x_{n+1}
+\end{eqnarray*}
+\end{Verbatim}
+\begin{eqnarray*}
+x_1 & = & 1 \\
+x_2 & = & 1 \\
+x_{n+2} & = & x_n + x_{n+1}
+\end{eqnarray*}
+\end{frame}
+
+
 \end{document}
