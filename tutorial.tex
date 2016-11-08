@@ -1,10 +1,13 @@
 \documentclass{beamer}
+\usepackage{fancyvrb}
 
 \newcommand\slide[2]{
 \begin{frame}[fragile=singleslide]{#1}
 #2
 \end{frame}
 }
+
+\newcommand\cmd[1]{{\tt \textbackslash #1}}
 
 \mode<presentation>
 {
@@ -19,14 +22,17 @@
 
 \begin{document}
 
+%%%
 \begin{frame}
   \titlepage
 \end{frame}
 
+%%%
 \slide{Outline}{\tableofcontents}
 
 \section{Why \LaTeX?}
 
+%%%
 \slide{\LaTeX~advocacy}{
   \begin{enumerate}
     \item It's free, portable, open source \& extensible
@@ -37,12 +43,23 @@
   \end{enumerate}
 }
 
-\section{The Basics}
+%%%
+\slide{\LaTeX~criticism}{
+  \begin{enumerate}
+    \item It's the worst programming language ever
+    \item Many things you just can't do
+    \item Syntax is horrible
+    \item Compilation from source is almost impossible
+    \item WYSIWYG editors suck
+  \end{enumerate}
+}
 
-\begin{frame}[fragile=singleslide]{Hello World}
-  \begin{verbatim}
+\section{Hello World}
+
+%%%
+\begin{frame}[fragile=singleslide]{helloworld.tex}
+\begin{Verbatim}[frame=single]
 \documentclass{article}
-
 \title{Marmosets Are Great}
 \author{Ian Holmes}
 
@@ -52,10 +69,92 @@
 
 \section{Introduction}
 Marmosets ({\em Callitrichidae})
-are New World Monkeys.
+are {\bf New World Monkeys}.
 
 \end{document}
-\end{verbatim}
+\end{Verbatim}
+Compile with {\tt pdflatex helloworld.tex}
 \end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{Section references}
+Can use \cmd{label} and \cmd{ref} as follows:
+\begin{Verbatim}[frame=single]
+\section{Introduction}
+\label{intro}
+Marmosets are New World Monkeys.
+
+\section{Geography}
+Marmosets are found in the New World,
+as mentioned in Section~\ref{intro}.
+\end{Verbatim}
+Note tilde {\tt \~{}} between {\tt Section} and \cmd{ref}: prevents linebreak.
+}
+
+\section{Makefiles}
+
+%%%
+\begin{frame}[fragile=singleslide]{Makefiles}
+If you change the section numbers, you will have to re-run {\tt pdflatex}.
+Consequently, it's common to run the program twice.
+Can do this with a Makefile:
+\begin{Verbatim}[frame=single]
+helloworld.pdf: helloworld.tex
+	pdflatex helloworld.tex
+	pdflatex helloworld.tex
+\end{Verbatim}
+
+General form of Makefile stanza:
+\begin{Verbatim}[frame=single]
+TARGET: DEPENDENCIES
+  <TAB> COMMANDS
+\end{Verbatim}
+\end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{Make command-line usage}
+\begin{itemize}
+\item General: {\tt make helloworld.pdf}
+\item Force rebuild: {\tt make -B helloworld.pdf}
+\item Dry run: {\tt make -n helloworld.pdf}
+\end{itemize}
+
+By default, {\tt make} just builds first target in Makefile.
+\end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{Makefiles and replicability}
+
+Titus Brown's checklist for paper replicability:
+\begin{itemize}
+\item a link to the paper itself, in preprint form, stored at arXiv;
+\item a tutorial for running the software on a Linux machine hosted in the Amazon cloud;
+\item a git repository for the software itself (hosted on github);
+\item a git repository for the LaTeX paper and analysis scripts, including an ipython notebook for generating the figures;
+\item instructions on how to start up an EC2 cloud instance, install the software and paper pipeline, and build most of the analyses and all of the figures from scratch;
+\item the data necessary to run the pipeline;
+\item some of the output data discussed in the paper.
+\end{itemize}
+\url{http://ivory.idyll.org/blog/replication-i.html}
+
+\end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{Pseudotargets and variables}
+\begin{Verbatim}[frame=single]
+MAIN = helloworld
+
+all: $(MAIN).pdf
+
+%.pdf: %.tex
+	pdflatex $<
+	pdflatex $<
+        open $@
+
+clean:
+	rm *.toc *.log *.out *.pdf *.aux *~
+\end{Verbatim}
+\end{frame}
+
 
 \end{document}
