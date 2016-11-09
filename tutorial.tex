@@ -70,6 +70,7 @@ This is some LaTeX source code
     \item Source files are plain text, revision control easier
     \item Typesetting is {\em much} better, especially math
     \item Style changes are easier
+    \item Easy to integrate with programmatic workflows
     \item {\bf Separation of form and content}
   \end{enumerate}
 }
@@ -77,11 +78,12 @@ This is some LaTeX source code
 %%%
 \slide{\LaTeX~criticism}{
   \begin{enumerate}
-    \item It's the worst programming language ever
-    \item Many things you just can't do
+    \item Possibly the worst programming language ever
     \item Syntax is horrible
     \item Compilation from source is almost impossible
     \item Mostly trial and error, unless you're a guru
+    \item Some things you just can't do (unless, guru)
+    \item {\bf Will mark you forever as a nerd pariah}
   \end{enumerate}
 }
 
@@ -94,7 +96,6 @@ This is some LaTeX source code
   such as \shell{emacs} or \shell{vim}.
 
   \vspace{\baselineskip}
-
   You could also use a specialized \LaTeX\ editor
   that gives you previews, such as TeXmaker,
   or even a WYSIWYG \LaTeX\ editor such as LyX (free)
@@ -104,7 +105,7 @@ This is some LaTeX source code
 }
 
 %%%
-\begin{frame}[fragile=singleslide]{helloworld.tex}
+\begin{frame}[fragile=singleslide]{\filename{helloworld.tex}}
 \begin{Verbatim}[frame=single]
 \documentclass{article}
 \title{Marmosets Are Great}
@@ -119,7 +120,25 @@ are {\bf New World Monkeys}.
 \end{Verbatim}
 Compile with \shell{pdflatex helloworld.tex}
 
-\trythis
+\trythis \hspace{\fill} \curl{http://tinyurl.com/texhello}
+\end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{\sample{documentclass} options}
+\begin{itemize}
+\item \cmd{documentclass[10pt]\{article\}}
+\item \cmd{documentclass[twocolumn]\{article\}}
+\item \cmd{documentclass[landscape]\{article\}}
+\item \cmd{documentclass\{letter\}}
+\item \cmd{documentclass\{book\}}
+\item \cmd{documentclass\{beamer\}} --- presentation
+\end{itemize}
+
+Further classes can be defined using a {\em class file}.
+
+For example, the journal {\em Bioinformatics} provides a class file \filename{bioinfo.cls}
+invoked with \cmd{documentclass\{bioinfo\}}.
+
 \end{frame}
 
 %%%
@@ -188,7 +207,7 @@ Titus Brown's checklist for paper replicability:
 \end{frame}
 
 %%%
-\begin{frame}[fragile=singleslide]{Pseudotargets and variables}
+\begin{frame}[fragile=singleslide]{Pseudotargets, pattern rules and variables}
 \begin{Verbatim}[frame=single]
 MAIN = helloworld
 
@@ -205,13 +224,24 @@ clean:
 
 \trythis
 \quad
-\parbox{.8\textwidth}{
+\parbox{.6\textwidth}{
 Use \shell{make}, \shell{make -n} and \shell{make -B}.
 
 If in doubt: \shell{make clean}
 }
 \end{frame}
 
+%%%
+\slide{Loading other files}{
+  \LaTeX\ files can include other files via the \cmd{input} command.
+  This is particularly useful with Makefiles, because you can generate
+  data-driven parts of your article automatically, and combine them
+  with manually-written sections.
+
+  \vspace{\baselineskip}
+  The \cmd{include} command is like \cmd{input} but does some extra book-keeping
+  (such as adding a page break). Useful for e.g. separating a thesis into chapter files.
+}
 
 \section{Styling}
 
@@ -235,6 +265,7 @@ Can you get {\bf bold}, {\em italic} \& {\tt typewriter} fonts?
 \ex{Google these typefaces.}
 \end{frame}
 
+%%%
 \slide{Typefaces}{
 \begin{tabular}{ll}
 \sample{\{\cmd{bf} Bold\}} & {\bf Bold} \\
@@ -243,6 +274,23 @@ Can you get {\bf bold}, {\em italic} \& {\tt typewriter} fonts?
 \end{tabular}
 }
 
+%%%
+\slide{Page numbering}{
+These go in the preamble:
+\begin{itemize}
+\item \cmd{pagenumbering\{arabic\}} --- default
+\item \cmd{pagenumbering\{roman\}}
+\item \cmd{pagenumbering\{Roman\}}
+\item \cmd{pagenumbering\{alph\}}
+\item \cmd{pagenumbering\{Alph\}}
+\end{itemize}
+
+\vspace{\baselineskip}
+To suppress page numbers altogether, use \cmd{pagestyle\{empty\}}.
+
+\vspace{\baselineskip}
+To add a table of contents: \cmd{tableofcontents}
+}
 
 %%%
 \begin{frame}[fragile=singleslide]{Lists}
@@ -511,6 +559,7 @@ x_{n+2} & = & x_n + x_{n+1}
 %%%
 \slide{Interlude}{
 \ex{Do the following:}
+\vspace{\baselineskip}
 \begin{enumerate}
 \item Download a set of predicted gene annotations from UCSC for your
   vertebrate of choice. (I used the Augustus gene predictions for
@@ -531,10 +580,10 @@ x_{n+2} & = & x_n + x_{n+1}
 require("ggplot2")
 exons <- read.csv("numExons.txt")
 plot <- qplot(exons,geom="histogram",binwidth=1,
-        main="Marmoset exon count distribution")
-      + scale_y_continuous()
-      + scale_x_continuous(limits=c(0,100))
-      + xlab("Number of exons")
+       main="Marmoset exon count distribution") +
+       scale_y_continuous() +
+       scale_x_continuous(limits=c(0,100)) +
+       xlab("Number of exons")
 ggsave ("exonFreqs.pdf", plot)
 \end{Verbatim}
 
@@ -615,7 +664,12 @@ Implies the existence of a file \filename{references.bib}
 
 %%%
 \begin{frame}[fragile=singleslide]{Running BibTeX}
-Typically you need to run \cmd{pdflatex}, then \cmd{bibtex}, then \cmd{pdflatex} twice to ensure references are correct:
+Typically you need to run \shell{pdflatex}, then \shell{bibtex}, then \shell{pdflatex} again {\em twice} to ensure all numbering is correct.
+
+\vspace{\baselineskip}
+In your \filename{Makefile}:
+
+\vspace{\baselineskip}
 \begin{Verbatim}[frame=single]
 %.pdf: %.tex references.bib
 	pdflatex $<
@@ -664,6 +718,9 @@ See e.g. \curl{https://en.wikibooks.org/wiki/LaTeX}
 
 %%%
 \slide{Packages}{
+  Loaded with \cmd{usepackage}, e.g. \cmd{usepackage\{amsmath\}}
+
+  \vspace{.75\baselineskip}
   \begin{tabular}{ll}
     Package & Purpose \\
     \hline
@@ -675,14 +732,28 @@ See e.g. \curl{https://en.wikibooks.org/wiki/LaTeX}
     {\tt chemfig} & Chemical structures \\
   \end{tabular}
 
-\vspace{\baselineskip}
-  
-\ex{Try a few of these out...}
+\vspace{.75\baselineskip}
+\centerline{ \ex{Try a few of these out...} }
 
-\vspace{\baselineskip}
-  
+\vspace{.75\baselineskip}
+CTAN (\curl{ctan.org}): Comprehensive TeX Archive Network
+
+\vspace{.75\baselineskip}
 These slides at \curl{https://github.com/ihh/latex-tutorial}
 }
 
+\slide{Homework}{
+Make a short report on a vertebrate in the UCSC genome database that is {\em not} a marmoset.
+Include:
+\begin{enumerate}
+\item Title, author, abstract
+\item Two-column layout
+\item Introduction, Results, References sections
+\item A figure showing the distribution of exon lengths (or other data from UCSC)
+\item A mathematical formula (e.g. a fit to the histogram)
+\item At least one table
+\item At least one reference
+\end{enumerate}
+}
 
 \end{document}
