@@ -305,7 +305,7 @@ List of books about wizard school
 \end{Verbatim}
 \trythis
 
-Also try \cmd{enumerate} instead of \cmd{itemize},
+Also try \sample{enumerate} instead of \sample{itemize},
 and try nesting lists inside other lists.
 
 \ex{How many levels deep can you nest?}
@@ -433,8 +433,8 @@ e^{-\frac{(x'-\mu)^2}{2\sigma^2}} dx'
   k
  \end{array}
  \right)
-= n \times (n-1) \times (n-2) \ldots \times (n-k)
-= \frac{n!}{k!}
+= \frac{n \times (n-1) \ldots \times (n-k)}{k!}
+= \frac{n!}{k!(n-k)!}
 \]
 \end{Verbatim}
 
@@ -445,9 +445,8 @@ e^{-\frac{(x'-\mu)^2}{2\sigma^2}} dx'
   k
  \end{array}
 \right)
-= n \times (n-1) \times (n-2)
-   \times \ldots \times (n-k)
-= \frac{n!}{k!}
+= \frac{n \times (n-1) \ldots \times (n-k)}{k!}
+= \frac{n!}{k!(n-k)!}
 \]
 \end{frame}
 
@@ -464,7 +463,7 @@ e^{-\frac{(x'-\mu)^2}{2\sigma^2}} dx'
  \right)
 }
 \[
- \binomial{5}{2} = 5 \times 4 \times 3 = 60
+ \binomial{5}{2} = (5 \times 4 \times 3) / 2 = 30
 \]
 \end{Verbatim}
 
@@ -476,7 +475,7 @@ e^{-\frac{(x'-\mu)^2}{2\sigma^2}} dx'
  \end{array}
  \right)
 }
-$\binomial{5}{2} = 5 \times 4 \times 3 = 60$
+$\binomial{5}{2} = (5 \times 4 \times 3) / 2 = 30$
 \quad \trythis
 \end{frame}
 
@@ -644,6 +643,8 @@ Of course, you can get more elaborate...
 %%%
 \begin{frame}[fragile=singleslide]{BibTeX}
 \begin{Verbatim}[frame=single]
+Marmosets are highly social \cite{Marx2016}.
+...
 \bibliographystyle{natbib}  % or plain, unsrt, ...
 \bibliography{references}
 \end{Verbatim}
@@ -656,8 +657,7 @@ Implies the existence of a file \filename{references.bib}
  Journal="Nat. Methods",
  Year="2016",
  Volume="13",
- Number="11",
- Pages="911--916"
+ Number="11"
 }
 \end{Verbatim}
 \end{frame}
