@@ -81,11 +81,27 @@ This is some LaTeX source code
     \item Many things you just can't do
     \item Syntax is horrible
     \item Compilation from source is almost impossible
-    \item WYSIWYG editors suck
+    \item Mostly trial and error, unless you're a guru
   \end{enumerate}
 }
 
 \section{Hello World}
+
+%%%
+\slide{Text editor}{
+  Before you start, your life will be much easier with
+  a text editor that has \LaTeX\ syntax-coloring,
+  such as \shell{emacs} or \shell{vim}.
+
+  \vspace{\baselineskip}
+
+  You could also use a specialized \LaTeX\ editor
+  that gives you previews, such as TeXmaker,
+  or even a WYSIWYG \LaTeX\ editor such as LyX (free)
+  or Texpad (OSX, \$\$\$).
+  But you need to understand the \LaTeX\ underneath.
+  So...
+}
 
 %%%
 \begin{frame}[fragile=singleslide]{helloworld.tex}
@@ -188,7 +204,12 @@ clean:
 \end{Verbatim}
 
 \trythis
+\quad
+\parbox{.8\textwidth}{
 Use \shell{make}, \shell{make -n} and \shell{make -B}.
+
+If in doubt: \shell{make clean}
+}
 \end{frame}
 
 
@@ -602,6 +623,11 @@ Typically you need to run \cmd{pdflatex}, then \cmd{bibtex}, then \cmd{pdflatex}
 	pdflatex $<
 	pdflatex $<
 \end{Verbatim}
+
+\vspace{\baselineskip}
+
+{\em Yes: this is really messed-up}
+
 \end{frame}
 
 %%%
@@ -610,7 +636,53 @@ Typically you need to run \cmd{pdflatex}, then \cmd{bibtex}, then \cmd{pdflatex}
 
 BibTeX wrapper for PubMed.
 
+\vspace{\baselineskip}
+
 \ex{Try adding a reference for your vertebrate of choice.}
 }
+
+\section{Advanced}
+
+%%%
+\slide{Commands}{
+  \begin{tabular}{ll}
+    Command & Purpose \\
+    \hline
+    \cmd{hspace} & Fill horizontal space \\
+    \cmd{fbox} & Box with frame \\
+    \cmd{parbox} & Box with line breaks \\
+    \cmd{newcounter} & Create a new counter \\
+    \cmd{stepcounter} & Increment counter \\
+    \cmd{color} & Change text color \\
+    \cmd{colorbox} & Change background color \\
+  \end{tabular}
+
+\vspace{\baselineskip}
+
+See e.g. \curl{https://en.wikibooks.org/wiki/LaTeX}
+}
+
+%%%
+\slide{Packages}{
+  \begin{tabular}{ll}
+    Package & Purpose \\
+    \hline
+    {\tt algorithm2e} & Writing out algorithms \\
+    {\tt beamer} & Presentations (like this one) \\
+    {\tt amsmath} & Better math formatting \\
+    {\tt geometry} & Page formatting (e.g. margins) \\
+    {\tt biblatex} & Better bibliographies \\
+    {\tt chemfig} & Chemical structures \\
+  \end{tabular}
+
+\vspace{\baselineskip}
+  
+\ex{Try a few of these out...}
+
+\vspace{\baselineskip}
+  
+These slides at \curl{https://github.com/ihh/latex-tutorial}
+}
+
 
 \end{document}

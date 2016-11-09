@@ -4,7 +4,6 @@ MAIN = tutorial
 all: $(MAIN).pdf.open
 
 %.open: %
-	killall Preview
 	open $<
 
 %.pdf: %.tex
