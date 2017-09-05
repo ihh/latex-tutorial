@@ -462,6 +462,32 @@ e^{-\frac{(x'-\mu)^2}{2\sigma^2}} dx'
 
 %%%
 \begin{frame}[fragile=singleslide]{Macro commands}
+
+\begin{Verbatim}[frame=single]
+\newcommand\MacroName[NumberOfArgs]{
+  Definition of macro
+  (Arg1 is #1, Arg2 is #2...)
+}
+\end{Verbatim}
+
+e.g.
+  
+\begin{Verbatim}[frame=single]
+\newcommand\isa[2]{
+ \fbox{ A {\em #1} is a type of {\em #2}. }
+}
+\isa{marmoset}{mammal}
+\isa{mammal}{verterbrate}
+\end{Verbatim}
+
+\vspace{\baselineskip}
+  \newcommand\isa[2]{\fbox{ A {\em #1} is a type of {\em #2}. } }
+  \isa{marmoset}{mammal}
+  \isa{mammal}{verterbrate}
+\end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{Macro commands}
 \begin{Verbatim}[frame=single]
 \newcommand\binomial[2]{
 \left(
@@ -729,34 +755,7 @@ BibTeX wrapper for PubMed.
 
 See e.g. \curl{https://en.wikibooks.org/wiki/LaTeX}
 }
-
   
-%%%
-\begin{frame}[fragile=singleslide]{Macros}
-
-\begin{Verbatim}[frame=single]
-\newcommand\MacroName[NumberOfArgs]{
-  Definition of macro
-  (Arg1 is #1, Arg2 is #2...)
-}
-\end{Verbatim}
-
-e.g.
-  
-\begin{Verbatim}[frame=single]
-\newcommand\isa[2]{
- \fbox{ A {\em #1} is a type of {\em #2}. }
-}
-\isa{marmoset}{mammal}
-\isa{mammal}{verterbrate}
-\end{Verbatim}
-
-\vspace{\baselineskip}
-  \newcommand\isa[2]{\fbox{ A {\em #1} is a type of {\em #2}. } }
-  \isa{marmoset}{mammal}
-  \isa{mammal}{verterbrate}
-\end{frame}
-
 %%%
 \slide{Packages}{
   Loaded with \cmd{usepackage}, e.g. \cmd{usepackage\{amsmath\}}
