@@ -61,6 +61,7 @@ This is some LaTeX source code
 \ex{Try the URL now!}
 }
 
+
 \section{Why \LaTeX?}
 
 %%%
@@ -100,7 +101,13 @@ This is some LaTeX source code
   that gives you previews, such as TeXmaker,
   or even a WYSIWYG \LaTeX\ editor such as LyX (free)
   or Texpad (OSX, \$\$\$).
-  But you need to understand the \LaTeX\ underneath.
+
+  \vspace{\baselineskip}
+  Best of all is \curl{https://www.overleaf.com/} ---
+  collaborative browser-based editor. Try it!
+
+  \vspace{\baselineskip}
+  You still need to understand the \LaTeX\ underneath.
   So...
 }
 
@@ -722,6 +729,33 @@ BibTeX wrapper for PubMed.
 
 See e.g. \curl{https://en.wikibooks.org/wiki/LaTeX}
 }
+
+  
+%%%
+\begin{frame}[fragile=singleslide]{Macros}
+
+\begin{Verbatim}[frame=single]
+\newcommand\MacroName[NumberOfArgs]{
+  Definition of macro
+  (Arg1 is #1, Arg2 is #2...)
+}
+\end{Verbatim}
+
+e.g.
+  
+\begin{Verbatim}[frame=single]
+\newcommand\isa[2]{
+ \fbox{ A {\em #1} is a type of {\em #2}. }
+}
+\isa{marmoset}{mammal}
+\isa{mammal}{verterbrate}
+\end{Verbatim}
+
+\vspace{\baselineskip}
+  \newcommand\isa[2]{\fbox{ A {\em #1} is a type of {\em #2}. } }
+  \isa{marmoset}{mammal}
+  \isa{mammal}{verterbrate}
+\end{frame}
 
 %%%
 \slide{Packages}{
