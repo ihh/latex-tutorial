@@ -250,6 +250,28 @@ If in doubt: \shell{make clean}
   (such as adding a page break). Useful for e.g. separating a thesis into chapter files.
 }
 
+\begin{frame}[fragile=singleslide]{Loading other files (example)}
+
+\begin{Verbatim}[frame=single]
+\documentclass[dvips,12pt]{book}
+\usepackage{color,graphics,palatino}
+\begin{document}
+\pagestyle{empty}  % page numbers off
+\tableofcontents
+\listoffigures
+\pagestyle{plain}  % page numbers on
+\input{chapter1}   % includes `chapter1.tex'
+\input{chapter2}   % includes `chapter2.tex'
+\input{fig2}       % includes `fig2.tex'
+\input{chapter3}   % includes `chapter3.tex'
+\input{chapter4}   % includes `chapter4.tex'
+\appendix
+\input{appendices} % includes `appendices.tex'
+\end{document}
+\end{Verbatim}
+
+}
+
 \section{Styling}
 
 %%%
