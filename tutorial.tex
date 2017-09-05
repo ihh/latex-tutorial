@@ -270,7 +270,7 @@ If in doubt: \shell{make clean}
 \end{document}
 \end{Verbatim}
 
-}
+\end{frame}
 
 \section{Styling}
 
@@ -339,6 +339,86 @@ and try nesting lists inside other lists.
 
 \ex{How many levels deep can you nest?}
 \end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{Margins}
+
+The following goes {\em before} \sample{begin\{document\}}
+\begin{Verbatim}[frame=single]
+\setlength{\topmargin}{-0.4in}
+\setlength{\topskip}{0.3in} % btwn header & text
+\setlength{\textheight}{9.5in} % height of text
+\setlength{\textwidth}{6in} % width of text
+\setlength{\oddsidemargin}{0.75in}
+\setlength{\evensidemargin}{0.75in}
+\end{Verbatim}
+
+or
+
+\begin{Verbatim}[frame=single]
+\addtolength{\oddsidemargin}{-1cm}
+\addtolength{\evensidemargin}{-1cm}
+\end{Verbatim}
+
+etc.
+}
+
+%%%
+\begin{frame}[fragile=singleslide]{Spacing}
+
+\begin{Verbatim}[frame=single]
+You can create vertical space \vspace{.5cm}
+between lines, or you can create horizontal
+space \hspace{1.5cm} between words.
+The arguments to these commands can be negative.
+\end{Verbatim}
+
+You can create vertical space \vspace{.5cm}
+between lines, or you can create horizontal
+space \hspace{1.5cm} between words.
+The arguments to these commands can be negative.
+
+\end{frame}
+
+%%%
+\begin{frame}[fragile=singleslide]{Spacing}
+
+\begin{Verbatim}[frame=single]
+Normally, paragraphs are vertically adjacent.
+
+To force space between paragraphs:
+\vspace{\baselineskip}
+
+See?
+\end{Verbatim}
+
+Normally, paragraphs are vertically adjacent.
+
+To force space between paragraphs:
+\vspace{\baselineskip}
+
+See?
+\end{frame}
+
+
+%%%
+\begin{frame}[fragile=singleslide]{Footnotes}
+
+\begin{Verbatim}[frame=single]
+Give me your tired, your poor,
+Your huddled masses yearning to breathe free,
+The wretched refuse of your teeming shore
+\footnote{Terms and conditions apply.}
+\end{Verbatim}
+
+Give me your tired, your poor,
+Your huddled masses yearning to breathe free,
+The wretched refuse of your teeming shore
+\footnote{Terms and conditions apply.}
+
+
+\end{frame}
+
 
 %%%
 \begin{frame}[fragile=singleslide]{Tables}
